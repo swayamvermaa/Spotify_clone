@@ -179,18 +179,43 @@ async function calldata() {
         }
     });
 
-    // ⌨️ 2. Arrow key seek (← and →)
+    // ⌨️ 2. Arrow key seek (← and →) functionaing enable for ching song and seek bar
+
+    let focusedSection = null;
+
+    document.querySelector(".abovebar").addEventListener("click", () => {
+        focusedSection = "songchange";
+    });
+
+    document.querySelector(".seek-bar-container").addEventListener("click", () => {
+        focusedSection = "seekbar";
+    });
+
+
     document.addEventListener("keydown", (e) => {
         if (!currentSong.duration) return;
 
-        if (e.code === "ArrowRight") {
-            // Forward 5 seconds
-            currentSong.currentTime = Math.min(currentSong.currentTime + 5, currentSong.duration);
-        } else if (e.code === "ArrowLeft") {
-            // Backward 5 seconds
-            currentSong.currentTime = Math.max(currentSong.currentTime - 5, 0);
+        if (focusedSection === "seekbar") {
+            // Seek bar control
+            if (e.code === "ArrowRight") {
+                currentSong.currentTime = Math.min(currentSong.currentTime + 5, currentSong.duration);
+            } else if (e.code === "ArrowLeft") {
+                currentSong.currentTime = Math.max(currentSong.currentTime - 5, 0);
+            }
+        }
+
+        if (focusedSection === "songchange") {
+            // Change song control
+            if (e.code === "ArrowRight") {
+                currentSongIndex = (currentSongIndex + 1) % songs.length;
+                playMusic(songs[currentSongIndex]);
+            } else if (e.code === "ArrowLeft") {
+                currentSongIndex = (currentSongIndex - 1 + songs.length) % songs.length;
+                playMusic(songs[currentSongIndex]);
+            }
         }
     });
+
 
     // add event listiner to play and pause music with spacebar
     document.addEventListener("keydown", (event) => {
@@ -222,8 +247,6 @@ async function calldata() {
 
 
 }
-
-
 
 // getsongs()
 calldata();
