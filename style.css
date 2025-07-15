@@ -276,3 +276,22 @@ body {
   background-color: #1db954; /* Spotify green */
   transition: width 0.3s ease;
 }
+.songplaybutton img{
+    cursor: pointer;
+}
+.songplaybutton img:hover{
+    width: 45px;
+    height: 45px;
+}
+.abovebar{
+    display: flex;
+    justify-content: space-between;
+}
+.songinfo{
+    color: white;
+    width: 120px;
+}
+.songtime{
+    color: white;
+    width: 107px;
+}

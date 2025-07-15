@@ -3,6 +3,12 @@ console.log("let begain javascript")
 // http://127.0.0.1:3000/songs/ - this is side local host server songs is the foolder in this site throu which we call api
 
 let currentSong = new Audio();
+let pause = document.querySelector(".songplaybutton").getElementsByTagName("img")[1];
+
+
+const current = document.getElementById("current");
+const total = document.getElementById("total");
+
 
 async function getsongs() {
     let a = await fetch("http://127.0.0.1:3000/songs/")
@@ -35,8 +41,18 @@ const playMusic = (track) => {
     currentSong.src = "/songs/" + track; // stored in currentSong variable
     // this is the path of song in which we play song
     currentSong.play();
+    pause.src = "Pausemusic.svg";
+    document.querySelector(".songinfo").innerHTML = track
+    current.textContent = "00:00";
+    total.textContent = "00:00";
 }
 
+
+function formatTime(seconds) {
+    const mins = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+}
 
 
 
@@ -60,7 +76,7 @@ async function calldata() {
          </li>`;
         // atach an event listiner to all songs 
     }
-    
+
     /*write code in professional way
      Array.from(document.querySelector(".songlist").getElementsByTagName("li")).forEach(e => {
         e.addEventListener("click", element => {
@@ -90,7 +106,7 @@ async function calldata() {
             playMusic(songName);
         });
     });
-     
+
     // console.log(song[2])
 
 
@@ -98,13 +114,36 @@ async function calldata() {
     /* this code is use to play song 
      var audio = new Audio(song[2]);
      audio.play();*/
-    
+
     /*audio.addEventListener("loadeddata", () => {
         let duration = audio.duration;
         // The duration variable now holds the duration (in seconds) of the audio clip
         console.log(duration)
     });*/
 
+    // add event listener to play next previous button
+
+    let pause = document.querySelector(".songplaybutton").getElementsByTagName("img")[1];
+    pause.addEventListener("click", () => {
+        if (currentSong.paused) {
+            currentSong.play();
+            pause.src = "Pausemusic.svg";
+        } else {
+            currentSong.pause();
+            pause.src = "playmusic.svg";
+        }
+    });
+
+
+    // add event listener to update time according to song
+
+    currentSong.addEventListener("loadedmetadata", () => {
+        total.textContent = formatTime(currentSong.duration);
+    });
+
+    currentSong.addEventListener("timeupdate", () => {
+        current.textContent = formatTime(currentSong.currentTime);
+    });
 
 }
 
