@@ -1,0 +1,76 @@
+🎵 All Useful Audio Methods
+Method	Description
+play():-	Starts playing the audio
+pause():-	Pauses the audio
+load():-	Reloads the audio element
+canPlayType(type):-	Checks if the audio type can be played ("audio/mp3", "audio/ogg", etc.)
+addEventListener():-	Listen to audio events (like ended, timeupdate)
+fastSeek(seconds):-	Seeks to a specific time (if supported)
+cloneNode():-	Clones the audio element (useful for overlapping sound effects)
+
+🎛️ All Useful Audio Properties
+Property	Type	Description
+src:-	String	Path to the audio file
+volume:-	Number (0 to 1)	Controls the volume
+currentTime:-	Number	Gets/sets current playback position (in seconds)
+duration:-	Number	Length of the audio (in seconds)
+paused:-	Boolean	true if audio is paused
+ended:-	Boolean	true if playback has ended
+loop:-	Boolean	Whether the audio should loop
+muted:-	Boolean	Mute/unmute the audio
+autoplay:-	Boolean	Auto-plays when loaded
+preload:-	String	Hint for browser loading ("auto", "metadata", "none")
+playbackRate:-	Number	Speed of playback (1 = normal)
+readyState:-	Number	Loading state (0–4)
+networkState:-	Number	Network state of the audio
+
+
+// Example Usage // Create a new Audio object
+
+let song = new Audio("/songs/Daylight.mp3");
+
+// Play
+song.play();
+
+// Pause
+song.pause();
+
+// Set volume to 50%
+song.volume = 0.5;
+
+// Seek to 30 seconds
+song.currentTime = 30;
+
+// Loop the song
+song.loop = true;
+
+// Mute the song
+song.muted = true;
+
+// Listen when song ends
+//ended event is use to detect when the song finishes playing
+song.addEventListener("ended", () => {
+    console.log("Song finished playing");
+});
+
+🔁 Playlist Example (Optional):
+js
+Copy
+Edit
+
+const songs = ["song1.mp3", "song2.mp3"];
+let current = 0;
+let audio = new Audio(`/songs/${songs[current]}`);
+
+audio.play();
+
+audio.addEventListener("ended", () => {
+    current = (current + 1) % songs.length;
+    audio.src = `/songs/${songs[current]}`;
+    audio.play();
+});
+
+
+// basic code of play music
+var audio = new Audio('audio_file.mp3');
+audio.play();

@@ -1,0 +1,278 @@
+@import url('https://fonts.googleapis.com/css2?family=Parastoo:wght@400..700&display=swap');
+
+body {
+    background-color: black;
+    color: antiquewhite;
+}
+
+* {
+    margin: 0px;
+    padding: 0px;
+    font-family: "Parastoo", serif;
+    font-weight: 700;
+}
+
+.right {
+    background-color: black;
+    padding: 3px;
+    margin: 5px;
+    width: 25vw;
+
+}
+
+.left {
+    width: 75vw;
+}
+
+.homelist {
+    /* display: flex; */
+    list-style: none;
+    /* width: 10px; */
+}
+
+.homelist li {
+    width: 15px;
+    display: flex;
+    gap: 15px;
+}
+
+.box1 {
+    /* margin: 6px; */
+    padding: 15px;
+    ;
+    border: 3px solid black;
+    background-color: rgb(30, 30, 30);
+    border-radius: 6px;
+    color: white;
+}
+
+.box2 {
+    /* margin: 6px; */
+    border: 3px solid black;
+    border-radius: 6px;
+    background-color: rgb(30, 30, 30);
+    color: white;
+    position: relative;
+}
+
+.logo {
+    filter: invert(300);
+    margin: 5px;
+}
+
+.searchsvg {
+    filter: invert(300);
+}
+
+.homesvg {
+    filter: invert(300);
+}
+
+.homelist {
+    margin: 10px;
+}
+
+.library {
+    display: flex;
+}
+
+.playlist {
+    filter: invert(300);
+    width: 20px;
+    height: 20px;
+    margin: 13px;
+    ;
+
+}
+
+.H2lib {
+    color: white;
+    font-size: 20px;
+    margin: 10px;
+}
+
+.box2 {
+    min-height: 80vh;
+    /* changes if i want */
+    /* min-height: 100vh; */
+}
+
+.footer a {
+    color: grey;
+}
+
+.footer {
+    display: flex;
+    font-size: 12px;
+    gap: 10px;
+    flex-wrap: wrap;
+    position: absolute;
+    bottom: 0;
+    padding: 10px;
+}
+
+.left {
+    margin: 8px;
+    background-color: rgb(30, 30, 30);
+}
+
+.leftnav {
+    /* min-height: 6.5vh; */
+    background-color: rgb(21, 21, 21);
+    border: 2px solid rgb(21, 21, 21);
+    border-radius: 6px;
+    /* margin: 6px; */
+    padding: 12px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.b1 {
+    font-family: "Parastoo", serif;
+    font-size: 17px;
+    width: 76px;
+    height: 35px;
+    color: rgb(85, 82, 82);
+    background-color: rgba(240, 248, 255, 0);
+    border: 0px;
+}
+
+.b1:hover {
+    color: antiquewhite;
+    font-size: 20px;
+}
+
+.b2 {
+    font-family: "Parastoo", serif;
+    font-size: 17px;
+    font-weight: 10px;
+    width: 76px;
+    height: 35px;
+    border: 2px solid white;
+    border-radius: 15px;
+}
+
+.b2:hover {
+    width: 79px;
+    height: 39px;
+}
+
+.arrowsvg {
+    width: 15px;
+    padding: 7px;
+}
+
+.spotifypllaylist {
+    padding: 0px 9px 0px 16px;
+}
+
+.cardcontainer {
+    display: flex;
+    gap: 25px;
+    flex-wrap: wrap;
+    max-height: 70vh;
+    overflow: scroll;
+    /* to hide horizontal scroll bar*/
+    overflow-x: hidden ;
+}
+
+.card1img {
+    /* we can give width and height according to me that why image is cuted that why i take 100% of the width of the image then fit it in the card*/
+    /* width: 300px;
+    height: 200px; */
+    /*using full image*/
+    width: 100%;
+    /* using object-fit properties */
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.card1 {
+    position: relative;
+    border: 17px solid rgb(23, 22, 22);
+    background: rgb(23, 22, 22);
+    width: 156px;
+    /* border: 2px solid red; */
+    border-radius: 10px;
+}
+
+.play svg {
+    position: absolute;
+    top: 128px;
+    right: 10px;
+    /* opacity: 0; */
+    transition: all 0.4s ease;
+}
+
+.songplaybar {
+    position: fixed;
+    width: 69.5vw;
+    bottom: 0;
+    padding: 10px;
+    background-color:  rgb(20, 20, 20);
+    margin: 3px;
+    border-radius: 15px;
+}
+
+.songplaybutton {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+.songlist{
+    padding: 22px 14px;
+    overflow: scroll;
+    height: 50vh;
+    overflow-x: hidden;
+}
+.songlist ul li{
+    list-style-type: decimal;
+    display: flex;
+    border: 2px solid grey;
+    gap: 5px;
+    margin: 10px;
+    font-size: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    align-items: center;
+}
+.info{
+    width: 176px;
+}
+.playbuttonlib{
+    height: 41px;
+}
+
+
+.seek-bar-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  /* max-width: 500px; */
+  margin: 4px auto;
+  font-family: sans-serif;
+}
+
+.time {
+  font-size: 12px;
+  color: #ccc;
+  min-width: 35px;
+  text-align: center;
+}
+
+.seek-bar {
+  flex: 1;
+  height: 6px;
+  background-color: #333;
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+}
+
+.seek-bar .progress {
+  height: 100%;
+  width: 40%; /* progress percentage */
+  background-color: #1db954; /* Spotify green */
+  transition: width 0.3s ease;
+}
