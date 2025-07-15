@@ -42,16 +42,24 @@ const playMusic = (track) => {
     // this is the path of song in which we play song
     currentSong.play();
     pause.src = "Pausemusic.svg";
-    document.querySelector(".songinfo").innerHTML = track
-    current.textContent = "00:00";
-    total.textContent = "00:00";
+    document.querySelector(".songinfo").innerHTML = decodeURI(track)
+    document.querySelector(".songtime").innerHTML = "00:00 / 00:00"
 }
 
 
-function formatTime(seconds) {
-    const mins = Math.floor(seconds / 60);
-    const secs = Math.floor(seconds % 60);
-    return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+// function to convert seconds to minutes and seconds format
+function secondsToMinutesSeconds(seconds) {
+    if (isNaN(seconds) || seconds < 0) {
+        return "00:00";
+    }
+
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = Math.floor(seconds % 60);
+
+    const formattedMinutes = String(minutes).padStart(2, '0');
+    const formattedSeconds = String(remainingSeconds).padStart(2, '0');
+
+    return `${formattedMinutes}:${formattedSeconds}`;
 }
 
 
@@ -137,17 +145,13 @@ async function calldata() {
 
     // add event listener to update time according to song
 
-    currentSong.addEventListener("loadedmetadata", () => {
-        total.textContent = formatTime(currentSong.duration);
-    });
 
     currentSong.addEventListener("timeupdate", () => {
-        current.textContent = formatTime(currentSong.currentTime);
-    });
+        document.querySelector(".songtime").innerHTML = `${secondsToMinutesSeconds(currentSong.currentTime)} / ${secondsToMinutesSeconds(currentSong.duration)}`
+        // document.querySelector(".circle").style.left = (currentSong.currentTime / currentSong.duration) * 100 + "%";
+    })
 
 }
-
-
 
 
 
