@@ -37,11 +37,15 @@ async function getsongs() {
 
 // function for play music
 // track = songname comming from calldata function
-const playMusic = (track) => {
+const playMusic = (track, pause=false) => {
     currentSong.src = "/songs/" + track; // stored in currentSong variable
     // this is the path of song in which we play song
-    currentSong.play();
-    pause.src = "Pausemusic.svg";
+    if(!pause){
+        currentSong.play()
+        play.src = "img/pause.svg"
+    }
+    // currentSong.play();
+    // pause.src = "Pausemusic.svg";
     document.querySelector(".songinfo").innerHTML = decodeURI(track)
     document.querySelector(".songtime").innerHTML = "00:00 / 00:00"
 }
@@ -68,6 +72,10 @@ async function calldata() {
     // get all songs array 
     let song = await getsongs();
     // it will add all url in array
+
+    playMusic(song[0], true);
+
+
     console.log(song)
     let songUrl = document.querySelector(".songlist").getElementsByTagName("ul")[0];
     for (const i of song) {
