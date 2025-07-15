@@ -2,6 +2,8 @@ console.log("let begain javascript")
 // we using api for call songs
 // http://127.0.0.1:3000/songs/ - this is side local host server songs is the foolder in this site throu which we call api
 
+let songs = [];
+let currentSongIndex = 0;
 let currentSong = new Audio();
 let pause = document.querySelector(".songplaybutton").getElementsByTagName("img")[1];
 
@@ -17,7 +19,7 @@ async function getsongs() {
     let div = document.createElement("div");
     div.innerHTML = response;
     let anchortag = div.getElementsByTagName("a");
-    let songs = [];
+    // let songs = [];
     // anchor tag work as string it run all anchortag in which link is present
     for (let i = 0; i < anchortag.length; i++) {
         const element = anchortag[i];
@@ -48,6 +50,7 @@ const playMusic = (track, pause = false) => {
     // pause.src = "Pausemusic.svg";
     document.querySelector(".songinfo").innerHTML = decodeURI(track)
     document.querySelector(".songtime").innerHTML = "00:00 / 00:00"
+    currentSongIndex = songs.indexOf(track);
 }
 
 
@@ -202,6 +205,19 @@ async function calldata() {
                 pause.src = "playmusic.svg"; // update button icon
             }
         }
+    });
+
+    // add event listener to next and previous button
+    // ▶️ Next song
+    document.querySelector(".nextplay").addEventListener("click", () => {
+        currentSongIndex = (currentSongIndex + 1) % songs.length;
+        playMusic(songs[currentSongIndex]);
+    });
+
+    // ◀️ Previous song
+    document.querySelector(".prevoisplay").addEventListener("click", () => {
+        currentSongIndex = (currentSongIndex - 1 + songs.length) % songs.length;
+        playMusic(songs[currentSongIndex]);
     });
 
 
