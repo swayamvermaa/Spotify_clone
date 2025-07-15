@@ -37,12 +37,12 @@ async function getsongs() {
 
 // function for play music
 // track = songname comming from calldata function
-const playMusic = (track, pause=false) => {
+const playMusic = (track, pause = false) => {
     currentSong.src = "/songs/" + track; // stored in currentSong variable
     // this is the path of song in which we play song
-    if(!pause){
+    if (!pause) {
         currentSong.play()
-        play.src = "img/pause.svg"
+        playMusic.src = "img/pause.svg"
     }
     // currentSong.play();
     // pause.src = "Pausemusic.svg";
@@ -156,8 +156,54 @@ async function calldata() {
 
     currentSong.addEventListener("timeupdate", () => {
         document.querySelector(".songtime").innerHTML = `${secondsToMinutesSeconds(currentSong.currentTime)} / ${secondsToMinutesSeconds(currentSong.duration)}`
-        // document.querySelector(".circle").style.left = (currentSong.currentTime / currentSong.duration) * 100 + "%";
-    })
+        document.querySelector(".progress").style.width = (currentSong.currentTime / currentSong.duration) * 100 + "%";
+    });
+
+    // Add an event listener to seekbar
+    const seekBar = document.querySelector(".seek-bar");
+    const progressBar = document.querySelector(".progress");
+
+    // 🖱️ 1. Mouse click to seek
+    seekBar.addEventListener("click", (e) => {
+        const rect = seekBar.getBoundingClientRect();
+        const clickX = e.clientX - rect.left;
+        const percent = (clickX / rect.width) * 100;
+
+        progressBar.style.width = percent + "%";
+
+        if (currentSong.duration) {
+            currentSong.currentTime = (percent / 100) * currentSong.duration;
+        }
+    });
+
+    // ⌨️ 2. Arrow key seek (← and →)
+    document.addEventListener("keydown", (e) => {
+        if (!currentSong.duration) return;
+
+        if (e.code === "ArrowRight") {
+            // Forward 5 seconds
+            currentSong.currentTime = Math.min(currentSong.currentTime + 5, currentSong.duration);
+        } else if (e.code === "ArrowLeft") {
+            // Backward 5 seconds
+            currentSong.currentTime = Math.max(currentSong.currentTime - 5, 0);
+        }
+    });
+
+    // add event listiner to play and pause music with spacebar
+    document.addEventListener("keydown", (event) => {
+        // Check if spacebar is pressed and not in an input/textarea
+        if (event.code === "Space" && !event.target.matches("input, textarea")) {
+            event.preventDefault(); // Prevent page scroll
+            if (currentSong.paused) {
+                currentSong.play();
+                pause.src = "Pausemusic.svg"; // update button icon
+            } else {
+                currentSong.pause();
+                pause.src = "playmusic.svg"; // update button icon
+            }
+        }
+    });
+
 
 }
 

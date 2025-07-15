@@ -272,9 +272,9 @@ body {
 
 .seek-bar .progress {
   height: 100%;
-  width: 40%; /* progress percentage */
+  width: 0.1%; /* progress percentage */
   background-color: #1db954; /* Spotify green */
-  transition: width 0.3s ease;
+  transition: width 0.2s ease;
 }
 .songplaybutton img{
     cursor: pointer;
