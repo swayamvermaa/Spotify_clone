@@ -246,6 +246,15 @@ async function calldata() {
     });
 
 
+    // add event listener to hamburger icon open and close as a sidebar
+
+    document.querySelector(".hamburgersvg").addEventListener("click", () => {
+        document.querySelector(".right").style.left = "0"
+    })
+    document.querySelector(".close").addEventListener("click", () => {
+        document.querySelector(".right").style.left = "-120%"
+    })
+
 }
 
 // getsongs()
