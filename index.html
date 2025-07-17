@@ -77,7 +77,20 @@
             <div class="spotifypllaylist">
                 <h1 style="color: white;">Spotify Playlist</h1>
                 <div class="cardcontainer">
-                    <div class="card1">
+                    <!-- using dataset tag revieseion for use  -->
+                    <!--  basic idra learn with documentation -->
+                    <!-- <button id="playBtn" data-song-id="001" data-artist="Post Malone">Play</button>
+                    const btn = document.getElementById('playBtn');
+                    console.log(btn.dataset.songId); // "001"
+                    console.log(btn.dataset.artist); -->
+
+                    <!-- Store a song ID, artist name, or path in a Spotify clone
+                    Add metadata to DOM elements
+                    Trigger actions or animations based on custom flags
+                    Pass values without needing extra classes or IDs -->
+
+
+                    <div data-folder="favorite" class="card1">
                         <div class="play">
                             <svg width="40" height="40" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
                                 <circle cx="30" cy="30" r="30" fill="#1ED760" />
@@ -89,7 +102,7 @@
                         <h2>Happy Hits!</h2>
                         <p>hits to boost your mood and fill you with Happiness!</p>
                     </div>
-                    <div class="card1">
+                    <div data-folder="Anime" class="card1">
                         <div class="play">
                             <svg width="40" height="40" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
                                 <circle cx="30" cy="30" r="30" fill="#1ED760" />
@@ -100,6 +113,9 @@
                             alt="nocard image" class="card1img">
                         <h2>Ashu Shukla!</h2>
                     </div>
+
+
+
                     <div class="card1">
                         <div class="play">
                             <svg width="40" height="40" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
@@ -139,7 +155,7 @@
 
 
 
-                    <div class="card1">
+                    <!-- <div class="card1">
                         <div class="play">
                             <svg width="40" height="40" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
                                 <circle cx="30" cy="30" r="30" fill="#1ED760" />
@@ -276,7 +292,7 @@
                             class="card1img">
                         <h2>Valentine!</h2>
                         <p>Indian's Unlimite Love ❤️ Trending!</p>
-                    </div>
+                    </div> -->
 
 
                     <!-- try -->

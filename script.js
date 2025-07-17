@@ -2,30 +2,32 @@ console.log("let begain javascript")
 // we using api for call songs
 // http://127.0.0.1:3000/songs/ - this is side local host server songs is the foolder in this site throu which we call api
 
-let songs = [];
+let songs;
 let currentSongIndex = 0;
 let currentSong = new Audio();
 let pause = document.querySelector(".songplaybutton").getElementsByTagName("img")[1];
+let currentfolder;
 
 
 const current = document.getElementById("current");
 const total = document.getElementById("total");
 
 
-async function getsongs() {
-    let a = await fetch("http://127.0.0.1:3000/songs/")
+async function getsongs(folder) {
+    currentfolder = folder;
+    let a = await fetch(`http://127.0.0.1:3000/${folder}/`)
     let response = await a.text()
-    console.log(response)
+    // console.log(response)
     let div = document.createElement("div");
     div.innerHTML = response;
     let anchortag = div.getElementsByTagName("a");
-    // let songs = [];
+    songs = [];
     // anchor tag work as string it run all anchortag in which link is present
     for (let i = 0; i < anchortag.length; i++) {
         const element = anchortag[i];
         //element.href.endsWith("mp3") using navigation dom 
         if (element.href.endsWith("mp3")) {
-            songs.push(element.href.split("/songs/")[1])
+            songs.push(element.href.split(`/${folder}/`)[1])
             // it give 2 array after split 
             //["http://127.0.0.1:3000,David_Kushner_-_Daylight.mp3"]
             // we print song name only using this = [1]
@@ -40,7 +42,7 @@ async function getsongs() {
 // function for play music
 // track = songname comming from calldata function
 const playMusic = (track, pause = false) => {
-    currentSong.src = "/songs/" + track; // stored in currentSong variable
+    currentSong.src = `/${currentfolder}/` + track; // stored in currentSong variable
     // this is the path of song in which we play song
     if (!pause) {
         currentSong.play()
@@ -70,31 +72,64 @@ function secondsToMinutesSeconds(seconds) {
 }
 
 
+function updateLibraryUI(folderSongs) {
+    let songUrl = document.querySelector(".songlist").getElementsByTagName("ul")[0];
+    songUrl.innerHTML = ""; // clear old songs
+
+    for (const song of folderSongs) {
+        songUrl.innerHTML += `<li>
+            <img src="music.svg" alt="image not available" style="margin: 4px;">
+            <div class="info">
+                <div>${song.replaceAll("%20", " ")}</div>
+                <div>Swayam Verma</div>
+            </div>
+            <div class="playnow">Play Now</div>
+            <div class="playbuttonlib">
+                <img src="playmusic.svg" alt="">
+            </div>
+        </li>`;
+    }
+
+    // Reattach event listeners
+    let allSongs = Array.from(document.querySelector(".songlist").getElementsByTagName("li"));
+    allSongs.forEach(songItem => {
+        songItem.addEventListener("click", () => {
+            let songName = songItem.querySelector(".info").firstElementChild.innerHTML.trim();
+            playMusic(songName);
+        });
+    });
+}
+
+
+
 
 async function calldata() {
     // get all songs array 
-    let song = await getsongs();
+    let song = await getsongs("songs/favorite");
     // it will add all url in array
 
     playMusic(song[0], true);
+    
+    updateLibraryUI(song);
+    
 
-
-    console.log(song)
-    let songUrl = document.querySelector(".songlist").getElementsByTagName("ul")[0];
-    for (const i of song) {
-        // note: replaceAll("%20"," ") use replaceall to remove %20 code from url 
-        songUrl.innerHTML = songUrl.innerHTML + `<li><img src="music.svg" alt="image not available" style="margin: 4px;">
-                                <div class="info">
-                                    <div>${i.replaceAll("%20", " ")}</div>
-                                    <div>Swayam verma</div>
-                                </div>
-                                <div class="playnow">Play Now</div>
-                                <div class="playbuttonlib">
-                                    <img src="playmusic.svg" alt="">
-                                </div>
-         </li>`;
-        // atach an event listiner to all songs 
-    }
+    // put this code to update libraray to albums
+    // console.log(song)
+    // let songUrl = document.querySelector(".songlist").getElementsByTagName("ul")[0];
+    // for (const i of song) {
+    //     // note: replaceAll("%20"," ") use replaceall to remove %20 code from url 
+    //     songUrl.innerHTML = songUrl.innerHTML + `<li><img src="music.svg" alt="image not available" style="margin: 4px;">
+    //                             <div class="info">
+    //                                 <div>${i.replaceAll("%20", " ")}</div>
+    //                                 <div>Swayam verma</div>
+    //                             </div>
+    //                             <div class="playnow">Play Now</div>
+    //                             <div class="playbuttonlib">
+    //                                 <img src="playmusic.svg" alt="">
+    //                             </div>
+    //      </li>`;
+    //     // atach an event listiner to all songs 
+    // }
 
     /*write code in professional way
      Array.from(document.querySelector(".songlist").getElementsByTagName("li")).forEach(e => {
@@ -275,6 +310,22 @@ async function calldata() {
             volumeBtn.src = 'volume.svg'; // switch back to volume icon
         }
     });
+
+    /*Property	Refers To
+    event.target	The actual element that triggered the event
+    event.currentTarget	The element that the event listener is attached to 
+    that means when we atrget anything it iwll target according to click but
+    when we use current target when we click on it , it will aminy targ that class or id that u mentioned*/
+
+    Array.from(document.getElementsByClassName("card1")).forEach(e => {
+        e.addEventListener("click", async item => {
+            songs = await getsongs(`songs/${item.currentTarget.dataset.folder}`);
+            playMusic(songs[0]);
+            updateLibraryUI(songs); // <-- this is the missing line to update library
+        });
+    });
+
+
 }
 
 // getsongs()
