@@ -109,11 +109,12 @@ async function calldata() {
     // it will add all url in array
 
     playMusic(song[0], true);
-    
+
     updateLibraryUI(song);
     
 
     // put this code to update libraray to albums
+
     // console.log(song)
     // let songUrl = document.querySelector(".songlist").getElementsByTagName("ul")[0];
     // for (const i of song) {
@@ -139,27 +140,26 @@ async function calldata() {
         })
     })*/
 
+    // this is for beginer 
 
-    // this is for beginer
-
-    // Step 1: Select the .songlist container
-    let songList = document.querySelector(".songlist");
-    // Step 2: Get all <li> elements inside .songlist
-    let allSongs = songList.getElementsByTagName("li");
-    // Step 3: Convert HTMLCollection to an Array so we can use forEach
-    let songArray = Array.from(allSongs);
-    // console.log(songArray);
-    // Step 4: Loop through each <li> element
-    songArray.forEach(function (songItem) {
-        // Step 5: Add click event to each song
-        songItem.addEventListener("click", function () {
-            // Step 6: Get the song name from the .info section inside the <li>
-            let songName = songItem.querySelector(".info").firstElementChild.innerHTML.trim();
-            console.log("Selected song:", songName);
-            // Step 7: Play the selected song by calling playMusic function
-            playMusic(songName);
-        });
-    });
+    // // Step 1: Select the .songlist container
+    // let songList = document.querySelector(".songlist");
+    // // Step 2: Get all <li> elements inside .songlist
+    // let allSongs = songList.getElementsByTagName("li");
+    // // Step 3: Convert HTMLCollection to an Array so we can use forEach
+    // let songArray = Array.from(allSongs);
+    // // console.log(songArray);
+    // // Step 4: Loop through each <li> element
+    // songArray.forEach(function (songItem) {
+    //     // Step 5: Add click event to each song
+    //     songItem.addEventListener("click", function () {
+    //         // Step 6: Get the song name from the .info section inside the <li>
+    //         let songName = songItem.querySelector(".info").firstElementChild.innerHTML.trim();
+    //         console.log("Selected song:", songName);
+    //         // Step 7: Play the selected song by calling playMusic function
+    //         playMusic(songName);
+    //     });
+    // });
 
     // console.log(song[2])
 
@@ -176,6 +176,8 @@ async function calldata() {
     });*/
 
     // add event listener to play next previous button
+
+
 
     let pause = document.querySelector(".songplaybutton").getElementsByTagName("img")[1];
     pause.addEventListener("click", () => {
@@ -320,7 +322,6 @@ async function calldata() {
     Array.from(document.getElementsByClassName("card1")).forEach(e => {
         e.addEventListener("click", async item => {
             songs = await getsongs(`songs/${item.currentTarget.dataset.folder}`);
-            playMusic(songs[0]);
             updateLibraryUI(songs); // <-- this is the missing line to update library
         });
     });
