@@ -1,4 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Parastoo:wght@400..700&display=swap');
+:root{
+    --a:0;
+}
 
 body {
     background-color: black;
@@ -198,13 +201,20 @@ body {
     width: 156px;
     /* border: 2px solid red; */
     border-radius: 10px;
+    transition: all 0.9s ;
+}
+.card1:hover {
+    border: 17px solid #a7a3a3;
+    background-color: #a7a3a3;
+    cursor: pointer;
+    --a:1;
 }
 
 .play svg {
     position: absolute;
-    top: 128px;
+    top: 109px;
     right: 10px;
-    /* opacity: 0; */
+    opacity: var(--a);
     transition: all 0.4s ease;
 }
 
@@ -491,4 +501,65 @@ body {
     /* .songtime{
         font-size: 7px;
     } */
+}
+.volumesvg:hover {
+    width: 30px;
+    height: 30px;
+}
+.vloume {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Volume Slider */
+.volume-slider {
+    position: absolute;
+    bottom: 276%; /* shift vertically above the button */
+    left: 65%;
+    transform: translateX(-50%) rotate(-90deg);
+    width: 100px;
+    height: 6px;
+    display: none;
+    appearance: none;
+    background: transparent;
+    z-index: 10;
+}
+
+/* Style the track */
+.volume-slider::-webkit-slider-runnable-track {
+    height: 6px;
+    background: #ccc;
+    border-radius: 3px;
+}
+
+/* Style the thumb */
+.volume-slider::-webkit-slider-thumb {
+    appearance: none;
+    height: 14px;
+    width: 14px;
+    background-color: #1db954; /* Spotify green */
+    border-radius: 50%;
+    border: none;
+    margin-top: -4px;
+    box-shadow: 0 0 2px #000;
+}
+
+/* Firefox support */
+.volume-slider::-moz-range-thumb {
+    height: 14px;
+    width: 14px;
+    background-color: #1db954;
+    border: none;
+    border-radius: 50%;
+}
+
+.volume-slider::-moz-range-track {
+    height: 6px;
+    background: #ccc;
+    border-radius: 3px;
+}
+.volumesvg {
+    transition: opacity 0.3s ease;
 }

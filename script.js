@@ -255,6 +255,26 @@ async function calldata() {
         document.querySelector(".right").style.left = "-290px"
     })
 
+    // volume button 
+    const volumeBtn = document.querySelector('.volumesvg');
+    const volumeSlider = document.querySelector('.volume-slider');
+
+    // Toggle slider visibility
+    volumeBtn.addEventListener('click', () => {
+        volumeSlider.style.display = volumeSlider.style.display === 'block' ? 'none' : 'block';
+    });
+
+    // Adjust volume and switch icon
+    volumeSlider.addEventListener('input', () => {
+        const vol = parseFloat(volumeSlider.value);
+        currentSong.volume = vol;
+
+        if (vol === 0) {
+            volumeBtn.src = 'mute.svg'; // switch to mute icon
+        } else {
+            volumeBtn.src = 'volume.svg'; // switch back to volume icon
+        }
+    });
 }
 
 // getsongs()

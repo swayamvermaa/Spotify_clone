@@ -1,0 +1,9 @@
+<svg id="volumeIcon" xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="#1DB954" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Speaker -->
+  <polygon points="5 9 9 9 13 5 13 19 9 15 5 15" fill="#1DB954" />
+  
+  <!-- Sound Waves -->
+  <path id="wave1" d="M16 8a4 4 0 0 1 0 8" />
+  <path id="wave2" d="M18.5 5.5a7 7 0 0 1 0 13" />
+  <path id="wave3" d="M21 3a10 10 0 0 1 0 18" />
+</svg>
