@@ -252,7 +252,7 @@ async function calldata() {
         document.querySelector(".right").style.left = "0"
     })
     document.querySelector(".close").addEventListener("click", () => {
-        document.querySelector(".right").style.left = "-120%"
+        document.querySelector(".right").style.left = "-290px"
     })
 
 }
