@@ -359,6 +359,7 @@ async function calldata() {
         e.addEventListener("click", async item => {
             songs = await getsongs(`songs/${item.currentTarget.dataset.folder}`);
             updateLibraryUI(songs); // <-- this is the missing line to update library
+            playMusic(songs[0]);
         });
     });
 
